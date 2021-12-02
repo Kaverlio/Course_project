@@ -1,22 +1,54 @@
-import React, { Component } from "react";
-import GoogleLogin from "react-google-login";
+import React, { useState, useContext} from 'react';
+import { GoogleLogin, GoogleLogout } from 'react-google-login';
+import { Context } from '../context/context';
 
-export class Login extends Component {
-    render() {
-        return (
-            <div>
+const clientId = "462358266969-jnq7395vs945k1nqcedov83pg49anhri.apps.googleusercontent.com";
+function Login() {
+
+    const [showloginButton, setShowloginButton] = useState(true);
+    const [showlogoutButton, setShowlogoutButton] = useState(false);
+    const [context, setContext] = useContext(Context);
+
+    const onLoginSuccess = (res) => {
+        console.log('Login Success:', res.profileObj);
+        setShowloginButton(false);
+        setShowlogoutButton(true);
+        setContext(res.profileObj);
+    };
+
+    const onLoginFailure = (res) => {
+        console.log('Login Failed:', res);
+    };
+
+    const onSignoutSuccess = () => {
+        alert("You have been logged out successfully");
+        console.clear();
+        setShowloginButton(true);
+        setShowlogoutButton(false);
+    }; 
+
+    return (
+        <div>
+            { showloginButton ?
                 <GoogleLogin
-                    clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
-                    render={renderProps => (
-                        <button onClick={renderProps.onClick} disabled={renderProps.disabled}>This is my custom Google button</button>
-                    )}
-                    buttonText="Login"
-                    onSuccess={responseGoogle}
-                    onFailure={responseGoogle}
+                    clientId={clientId}
+                    buttonText="Sign In"
+                    onSuccess={onLoginSuccess}
+                    onFailure={onLoginFailure}
                     cookiePolicy={'single_host_origin'}
-                />,
-                document.getElementById('googleButton')
-            </div>
-        )
-    }
+                    isSignedIn={true}
+                /> : null}
+
+            { showlogoutButton ?
+                <GoogleLogout
+                    clientId={clientId}
+                    buttonText="Sign Out"
+                    onLogoutSuccess={onSignoutSuccess}
+                >
+                </GoogleLogout> : null
+            }
+        </div>
+    );
 }
+export default Login;
+

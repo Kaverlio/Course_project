@@ -1,13 +1,18 @@
-import React, {useState} from 'react';
-import ReactDOM from 'react-dom';
-import Navbar from './navbar/navbar';
-import Profile from './profile_module/profile';
+import React from 'react'
+import ReactDOM from 'react-dom'
+
+import { Router } from "react-router-dom"
+import {createBrowserHistory} from 'history'
 
 
-ReactDOM.render(
-<React.StrictMode>
-<Navbar/>
-<Profile/>
-</React.StrictMode>,
-  document.getElementById('root')
+import App from './App'
+
+// создаём кастомную историю
+const history = createBrowserHistory()
+
+ReactDOM.render((
+   <Router history={history}>
+     <App/>
+   </Router>
+ ), document.getElementById('root')
 );
