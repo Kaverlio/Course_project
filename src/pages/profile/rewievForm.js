@@ -3,6 +3,21 @@ import Dropdown from "../../elements/Dropdown";
 import TextInput from "react-autocomplete-input";
 import { typeResurse, numberRating, tagArray } from "../../data/data";
 
+const requestUrl = "https://young-lowlands-67962.herokuapp.com/";
+
+function sendRequest(method, url, body){
+    const headers = {
+        'Content-Type': 'app/review'
+    }
+    return fetch(url, {
+        method: method,
+        body: JSON.stringify(body),
+        headers = headers
+    }).then(response => {
+        return response.json();
+    });
+}
+
 export default function () {
 
     const [nameReview, setNameReview] = useState("");
@@ -14,11 +29,7 @@ export default function () {
     const submitForm = async (e) => {
         try {
             const body = { nameReview, selectedType, descReview, selectedRating, ganreReview };
-            const response = fetch("https://course-project-itransition.herokuapp.com:5000/reviews", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(body)
-            });
+            sendRequest('POST', requestUrl, body).then(data => console.log(data)).catch(err => console.log(err));
         } catch (err) {
             console.log(err.message);
         }
@@ -69,3 +80,4 @@ export default function () {
         </div>
     );
 }
+

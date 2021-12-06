@@ -2,8 +2,6 @@ import React, { useState, useContext} from 'react';
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import { Context } from '../context/context';
 
-const requestUrl = "https://young-lowlands-67962.herokuapp.com/";
-
 const clientId = "462358266969-jnq7395vs945k1nqcedov83pg49anhri.apps.googleusercontent.com";
 function Login() {
 
@@ -12,12 +10,7 @@ function Login() {
     const [context, setContext] = useContext(Context);
 
     const onLoginSuccess = (res) => {
-        const body = {
-            name: res.name,
-            email: res.email,
-            status: "user"
-        }
-        sendRequest('POST', requestUrl, body).then(data => console.log(data)).catch(err => console.log(err));
+        
         console.log('Login Success:', res.profileObj);
         setShowloginButton(false);
         setShowlogoutButton(true);
