@@ -11,6 +11,7 @@ function sendRequest(method, url, body){
         'Access-Control-Allow-Origin': '*'
     }
     return fetch(url, {
+        
         mode: "no-cors",
         method: method,
         body: JSON.stringify(body),
