@@ -12,7 +12,7 @@ function sendRequest(method, url, body){
     return fetch(url, {
         method: method,
         body: JSON.stringify(body),
-        headers = headers
+        headers: headers
     }).then(response => {
         return response.json();
     });
