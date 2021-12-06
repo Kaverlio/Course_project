@@ -17,7 +17,7 @@ function Login() {
             email: res.email,
             status: "user"
         }
-        sendRequest('POST', requestUrl, body);
+        sendRequest('POST', requestUrl, body).then(data => console.log(data)).catch(err => console.log(err));
         console.log('Login Success:', res.profileObj);
         setShowloginButton(false);
         setShowlogoutButton(true);
@@ -68,5 +68,7 @@ function sendRequest(method, url, body){
         method: method,
         body: JSON.stringify(body),
         headers = headers
+    }).then(response => {
+        return response.json();
     });
 }
