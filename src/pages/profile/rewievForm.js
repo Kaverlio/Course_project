@@ -3,7 +3,7 @@ import Dropdown from "../../elements/Dropdown";
 import TextInput from "react-autocomplete-input";
 import { typeResurse, numberRating, tagArray } from "../../data/data";
 
-const requestUrl = "https://young-lowlands-67962.herokuapp.com/";
+const requestUrl = "https://young-lowlands-67962.herokuapp.com/api/review";
 
 function sendRequest(method, url, body){
     const headers = {
