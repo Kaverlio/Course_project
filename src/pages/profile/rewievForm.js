@@ -3,13 +3,15 @@ import Dropdown from "../../elements/Dropdown";
 import TextInput from "react-autocomplete-input";
 import { typeResurse, numberRating, tagArray } from "../../data/data";
 
-const requestUrl = "https://young-lowlands-67962.herokuapp.com/api/review";
+const requestUrl = "https://young-lowlands-67962.herokuapp.com";
 
 function sendRequest(method, url, body){
     const headers = {
-        'Content-Type': 'app/review'
+        'Content-Type': '/app/review',
+        'Access-Control-Allow-Origin': '*'
     }
     return fetch(url, {
+        mode: "no-cors",
         method: method,
         body: JSON.stringify(body),
         headers: headers
